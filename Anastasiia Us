@@ -1,0 +1,80 @@
+// challenge #1
+// Anastasiia Us
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class addOneToNumber
+{
+    //vector to store the digits of the number
+    private:
+        vector<int> multiDigitNumber;
+    
+    public:
+        //gets the input number digit by digit
+        void getInputNumber()
+        {
+            int digit;
+            cout << "Enter a single digit (enter a non-digit to finish): ";
+            while (cin >> digit && digit >=0 && digit <= 9) // iterates only if the number is a positive single digit
+            {
+                //adds the digit to the vector
+                multiDigitNumber.push_back(digit);
+            }
+            //clear error flags
+            cin.clear();
+        }
+
+        //tests the input number
+        /*void printInputNumber()
+        {
+            for (int i = 0; i < multiDigitNumber.size(); i++)
+            {
+                cout << multiDigitNumber[i];
+            }
+            cout < endl;
+        }*/
+
+        //adds one to the input multi digit number
+        void calculateOutputNumber()
+        {
+            if(multiDigitNumber.empty())
+                return;
+            for (int i = multiDigitNumber.size() - 1; i >= 0; i--)
+            {
+                if (multiDigitNumber[i] < 9)
+                {
+                    multiDigitNumber[i]++;
+                    return;
+                }
+                else
+                    multiDigitNumber[i] = 0;
+            }
+            multiDigitNumber.insert(multiDigitNumber.begin(), 1);
+        }
+
+        //prints out the output number
+        void printOutputNumber()
+        {
+            cout << "Result: ";
+            for (int i = 0; i < multiDigitNumber.size(); i++)
+            {
+                cout << multiDigitNumber[i];
+            }
+            cout << endl;
+        }
+};
+
+int main()
+{
+    addOneToNumber num1;
+
+    num1.getInputNumber();
+    //num1.printInputNumber();      //test
+    num1.calculateOutputNumber();
+    num1.printOutputNumber();
+
+    return 0;
+}
